@@ -13,7 +13,14 @@ func main() {
 
 	flag.Parse()
 
-	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	f, ferr := os.OpenFile("info.log", os.O_RDWR|os.O_CREATE, 0666)
+	if ferr != nil {
+		log.Fatal(ferr)
+	}
+
+	defer f.Close()
+
+	infoLog := log.New(f, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	mux := http.NewServeMux()
