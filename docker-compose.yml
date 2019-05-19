@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'P@ssw0rd'
+      MYSQL_USER: 'snippetadmin'
+      MYSQL_PASS: 'snippetpass'
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3306:3306
+    volumes:
+      - /mnt/DATA/docker-volumes/mysql/snippetbox/:/var/lib/mysql
+
+    
